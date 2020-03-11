@@ -16,8 +16,8 @@ Business case: roughly 25% of the reservations were cancelled, cost to the hotel
 <br>
 
 ## Files in the Project
-- H1.csv: original datafile of Hotel 1, downloaded from the link above
-- H2.csv: original datafile of Hotel 2, downloaded from the link above
-- 01_dataclean.ipynb: our work containing 
-- 02_modelling.ipynb
-- presentation.pdf: a presentation of the project, aimed at non-technical stakeholders
+- `H1.csv`: original datafile of Hotel 1, downloaded from the link above
+- `H2.csv`: original datafile of Hotel 2, downloaded from the link above
+- `01_dataclean.ipynb`: our work containing data cleanup and EDA
+- `02_modelling.ipynb`: modelling work
+- `presentation.pdf`: a presentation of the project, aimed at non-technical stakeholders
