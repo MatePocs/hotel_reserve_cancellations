@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import math
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 month_dictionary = {
     'January': 1,
@@ -179,3 +182,84 @@ def apply_continuous_datacleaning(data_input):
     current_rownum = len(data)
     
     return data, deleted_rownum
+
+
+def plot_dists(df, var_type = None, target = None):
+    """ for a specified DataFrame state whether you want to plot continuous variables by passing 
+        the argument: 'continuous' if so then the function will plot a distribution plot for each 
+        numeric variable or a boxplot depending on whether you specify a target variable
+        
+        If var_type = None then the function will plot a barplot or a stacked barplot
+        depending on whether you specify a target variable        
+        """
+    if var_type == 'continuous':
+    
+        numeric_columns = cont_cols(df)
+    
+        numeric_columns_count = len(numeric_columns)
+
+        shape_dim = math.ceil(numeric_columns_count/4)
+    
+        df_cont = df[numeric_columns]
+        fig2, axes2 = plt.subplots(shape_dim, 4, figsize = (20,10))
+    
+        for n in range(0, numeric_columns_count):
+    
+            i = df_cont.dtypes.index[n]
+    
+            row = (n)//4
+            col = (n)%4
+    
+            ax = axes2[row][col]
+            if target:
+                sns.boxplot(x = target, y = i, data = df[numeric_columns + [target]], ax = ax)
+                ax.set_title('{}'.format(i))
+                plt.subplots_adjust(wspace=0.2, hspace=0.2);
+            else:
+                sns.kdeplot(df_cont[i], ax = ax)
+                ax.set_title('{}'.format(i))
+                plt.subplots_adjust(wspace=0.2, hspace=0.2);
+            
+    else:
+        
+        cat_columns = cat_cols(df)
+    
+        cat_columns_count = len(cat_columns)
+
+        shape_dim = math.ceil(cat_columns_count/4)
+    
+        df_cat = df[cat_columns]
+
+        fig2, axes2 = plt.subplots(shape_dim, 4, figsize = (30,30))
+        
+    
+        for n in range(0, cat_columns_count):
+    
+            i = df_cat.dtypes.index[n]
+            
+            row = (n)//4
+            col = (n)%4
+    
+            ax = axes2[row][col]
+            if target:
+                if i == target:
+                    sns.countplot(x = i, data = df_cat, ax = ax)
+                    ax.set_title('{}'.format(i))
+                    plt.subplots_adjust(wspace=0.2, hspace=0.2);
+                else:
+                    df_plot = df.groupby([target, i]).size().reset_index().pivot(columns=target, index=i, values=0)
+                    df_plot.plot(kind='bar', stacked=True, ax = ax)
+                    ax.set_title('{}'.format(i))
+                    plt.subplots_adjust(wspace=0.2, hspace=0.2);
+            else:
+                sns.countplot(x = i, data = df_cat, ax = ax)
+                ax.set_title('{}'.format(i))
+                plt.subplots_adjust(wspace=0.2, hspace=0.2);
+
+def cont_cols(df):
+    """For a given DataFrame: identify all columns that hold numeric data (with 15+ unique values)"""
+    return ([col for col in df.columns if df[col].dtype in ['float64', 'int64'] and df[col].nunique() > 15])
+
+def cat_cols(df):
+    """For a given DataFrame: identify all columns that hold 15 or fewer unique values"""   
+    return ([col for col in df.columns if df[col].nunique() <= 15])
