@@ -1,12 +1,13 @@
 # Hotel Reservation Cancellation Analysis
-<br>
 
 The project is the result of collaborative work between Jahir Miah and Mate Pocs. 
 <br>
 
 ## Executive Summary
-Cancellations are a major issue when it comes to accurate financial and demand forecasting in the hospitality industry, and in the lodging industry in particular. In the dataset we examined over the course of two years, about 25% of the total reservations were cancelled. Hotels try to mitigate the cost with various strategies including cancellation policies and overbooking. 
+Cancellations are a major issue when it comes to accurate financial and demand forecasting in the hospitality industry, and in the lodging industry in particular.  Hotels try to mitigate the cost with various strategies including cancellation policies and overbooking. In the dataset we examined over the course of two years, about 25% of the total reservations were cancelled.
 <br>
+
+![](cover_chart.png)
 
 In our analysis, we put the emphasis on predicting the cancellations correctly: if we predict that a guest will not cancel, we better be sure that they actually show up. This is a conservative approach to the problem. A question that can be answered with such a model: _The estimation of Q3 proifts are X EUR based on reservations alone, but it is very volatile, can be find a conservative estimation in the form of the profits in Q3 are going to by Y EUR with at least 90% probability?_ So it is the financial accuracy question we are aiming for. If a guest was predicted to cancel but they do show up, that is not assumed to be the same magnitude of issue. Please note that the framework can be used to answer different questions as well after changing the threshold parameters.  
 <br>
