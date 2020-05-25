@@ -22,13 +22,13 @@ The authors collected a wide scope of variables of the guests who made a reserva
 <br>
 
 ## Moodelling
-
 In our analysis, we put the emphasis on predicting the cancellations correctly: if we predict that a guest will not cancel, we better be sure that they actually show up. This is a conservative approach to the problem. A question that can be answered with such a model: _The estimation of Q3 proifts are X EUR based on reservations alone, but it is very volatile, can be find a conservative estimation in the form of the profits in Q3 are going to by Y EUR with at least 90% probability?_ So it is the financial accuracy question we are aiming for. If a guest was predicted to cancel but they do show up, that is not assumed to be the same magnitude of issue. Please note that the framework can be used to answer different questions as well after changing the threshold parameters.
 <br>
 
 In our project, we build a model that predicts whether a customer who just made a reservation will cancel it before the arrival date. The underlying data is from a specific hotel in Portugal, but the methodology can be transferred. The data is complicated enough that simple exploratory data analysis cannot unveil all the connections, so we applied different Machine Learning models, the best performing one was a Random Forest Classifier. The model performs with an approximately 90% accuracy on the test data. Using the predictions can greatly improve the accuracy of forecasts the hotel makes. 
 <br>
 
+## Key Indicators
 Other than accurate forecasting, the model's results can also be used to identify the key indicators of cancellations. To name the most prominent ones: 
 <br>
 - deposit: customers who made a non-refundable deposit are less likely to cancel
